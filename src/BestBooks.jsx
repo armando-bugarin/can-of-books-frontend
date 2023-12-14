@@ -39,6 +39,18 @@ function BestBooks(props) {
     }
   }
 
+  async function deleteBook(bookToDelete) {
+    const url = `https://can-of-book-backend.onrender.com/books?${bookToDelete._id}`;
+    try {
+      await axios.delete.url
+      const bookFilter = books.filter(book._id => book._id !== bookToDelete._id);
+      setBooks(bookFilter);
+    }
+    catch(error) {
+      console.log('error');
+    }
+  }
+
   // Mount()
 
 
@@ -53,16 +65,19 @@ function BestBooks(props) {
             <h3>{books[0].title}</h3>
             <p>{books[0].description}</p>
             <p>Status: {books[0].status}</p>
+            <button onClick={deleteBook}>Delete</button>
           </Carousel.Item>
           <Carousel.Item>
           <h3>{books[1].title}</h3>
             <p>{books[1].description}</p>
             <p>Status: {books[1].status}</p>
+            <button onClick={deleteBook}>Delete</button>
           </Carousel.Item>
           <Carousel.Item>
           <h3>{books[2].title}</h3>
             <p>{books[2].description}</p>
             <p>Status: {books[2].status}</p>
+            <button onClick={deleteBook}>Delete</button>
           </Carousel.Item>
         </Carousel>
       ) : (
