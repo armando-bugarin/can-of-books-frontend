@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel'
 
-function BestBooks() {
+function BestBooks(props) {
   // constructor (props) {
   //   super(props);
   //   this.state = {
@@ -15,6 +15,7 @@ function BestBooks() {
 
   useEffect(() => {
     mount();
+    extraBooks();
   }, []);
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
@@ -22,7 +23,7 @@ function BestBooks() {
   async function mount() {
     try {
       // app.get('/books', async (request, response) => {
-      const response = await axios.get('http://localhost:3000/books');
+      const response = await axios.get('https://can-of-book-backend.onrender.com/books');
       if (response.data) {
         console.log(response.data)
         setBooks(response.data);
@@ -30,7 +31,12 @@ function BestBooks() {
     } catch (error) {
       console.log(error);
     }
+  }
 
+  function extraBooks() {
+    if(books !== null && props.books !== null) {
+      books.push(props.books);
+    }
   }
 
   // Mount()
@@ -49,14 +55,14 @@ function BestBooks() {
             <p>Status: {books[0].status}</p>
           </Carousel.Item>
           <Carousel.Item>
-          <h3>{books[3].title}</h3>
-            <p>{books[3].description}</p>
-            <p>Status: {books[3].status}</p>
+          <h3>{books[1].title}</h3>
+            <p>{books[1].description}</p>
+            <p>Status: {books[1].status}</p>
           </Carousel.Item>
           <Carousel.Item>
-          <h3>{books[4].title}</h3>
-            <p>{books[4].description}</p>
-            <p>Status: {books[4].status}</p>
+          <h3>{books[2].title}</h3>
+            <p>{books[2].description}</p>
+            <p>Status: {books[2].status}</p>
           </Carousel.Item>
         </Carousel>
       ) : (
